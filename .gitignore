@@ -22,3 +22,7 @@ _testmain.go
 *.exe
 
 src
+
+vendor
+.idea
+*.iml

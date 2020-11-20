@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"compress/gzip"
 	"compress/zlib"
+	"context"
 	"crypto/tls"
 	"encoding/json"
 	"errors"
@@ -47,6 +48,7 @@ type Request struct {
 	CookieJar           http.CookieJar
 	ShowDebug           bool
 	OnBeforeRequest     func(goreq *Request, httpreq *http.Request)
+	Context 			*context.Context
 }
 
 type compression struct {
@@ -366,6 +368,9 @@ func (r Request) Do() (*Response, error) {
 	}
 
 	req, err := r.NewRequest()
+	if nil != r.Context && nil != req {
+		req = req.WithContext(*r.Context)
+	}
 
 	if err != nil {
 		// we couldn't parse the URL.
