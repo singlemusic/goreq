@@ -48,7 +48,7 @@ type Request struct {
 	CookieJar           http.CookieJar
 	ShowDebug           bool
 	OnBeforeRequest     func(goreq *Request, httpreq *http.Request)
-	Context 			*context.Context
+	Context 			context.Context
 }
 
 type compression struct {
@@ -275,7 +275,7 @@ func (r Request) WithCookie(c *http.Cookie) Request {
 	return r
 }
 
-func (r Request) WithContext(c *context.Context) Request {
+func (r Request) WithContext(c context.Context) Request {
 	r.Context = c
 	return r
 }
@@ -374,7 +374,7 @@ func (r Request) Do() (*Response, error) {
 
 	req, err := r.NewRequest()
 	if nil != r.Context && nil != req {
-		req = req.WithContext(*r.Context)
+		req = req.WithContext(r.Context)
 	}
 
 	if err != nil {
