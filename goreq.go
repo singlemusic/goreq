@@ -275,6 +275,11 @@ func (r Request) WithCookie(c *http.Cookie) Request {
 	return r
 }
 
+func (r Request) WithContext(c *context.Context) Request {
+	r.Context = c
+	return r
+}
+
 func (r *Request) AddProxyConnectHeader(name string, value string) {
 	if r.proxyConnectHeaders == nil {
 		r.proxyConnectHeaders = []headerTuple{}
