@@ -1,4 +1,4 @@
-module github.com/singlemusic/m/v2
+module github.com/singlemusic/goreq
 
 go 1.15
 
